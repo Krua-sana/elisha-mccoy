@@ -1,0 +1,132 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Input from "../components/Input.astro";
+import Textarea from "../components/Textarea.astro";
+import Select from "../components/Select.astro";
+import Checkbox from "../components/Checkbox.astro";
+import Button from "../components/Button.astro";
+
+const eventTypes = [
+  "Wedding / Bridal",
+  "Special Occasion",
+  "Prom",
+  "Editorial / Photoshoot",
+  "Personal Branding",
+  "Consultation / Lesson",
+  "Other",
+];
+---
+
+<BaseLayout
+  title="Book a Makeup Artist in Oxfordshire | Elisha McCoy"
+  description="Enquire or book Elisha McCoy for bridal, wedding, occasion, editorial and on-location makeup services across Oxfordshire and beyond."
+>
+  <section class="px-6 pt-16 sm:px-10 lg:px-16 lg:pt-24">
+    <p class="text-xs uppercase tracking-[0.14em] text-subtle">Contact</p>
+    <h1 class="mt-3">
+      <span class="block text-base font-ui font-normal normal-case tracking-normal text-subtle sm:text-lg">
+        Enquire About Bridal, Wedding &amp; Occasion Makeup
+      </span>
+      <span class="mt-2 block font-header text-3xl text-ink sm:text-4xl">Book Your Makeup Appointment</span>
+    </h1>
+    <p class="mt-6 max-w-2xl text-body">
+      Tell me your date, location and what you're planning, and I'll reply with availability and a bespoke, enquiry-led quote — no public price list.
+    </p>
+  </section>
+
+  <section class="mx-auto grid max-w-[1440px] grid-cols-1 gap-16 px-6 py-16 sm:px-10 lg:grid-cols-[2fr_1fr] lg:px-16 lg:py-20">
+    <form id="enquiry-form" novalidate class="max-w-2xl space-y-8">
+      <div>
+        <h2 class="font-header text-2xl text-ink">Send an enquiry</h2>
+        <p class="mt-2 text-sm text-subtle">Fields marked (required) must be completed.</p>
+      </div>
+
+      <Input id="name" label="Full name" required />
+      <Input id="email" label="Email address" type="email" required />
+      <Select id="event-type" label="Event type" required options={eventTypes} />
+
+      <Input
+        id="event-date"
+        label="Event date"
+        type="date"
+        required
+        error="Please add an approximate date so I can check availability."
+      />
+
+      <Input id="location" label="Location or venue" />
+      <div>
+        <Input id="people" label="Number of people" type="number" helper="Include yourself. An estimate is fine." />
+      </div>
+
+      <Textarea id="message" label="The look you have in mind" helper="Any inspiration, colours or references are welcome." />
+
+      <Checkbox id="consent" required />
+
+      <Button type="submit" variant="primary">Send Enquiry</Button>
+      <p id="form-status" role="status" class="sr-only"></p>
+    </form>
+
+    <aside class="space-y-8 text-sm">
+      <div>
+        <p class="text-xs uppercase tracking-[0.14em] text-subtle">What to Include</p>
+        <ul class="mt-4 space-y-3 text-body">
+          <li>Your event date (approximate is fine)</li>
+          <li>The type of event</li>
+          <li>How many people need makeup</li>
+          <li>Location or venue</li>
+          <li>The look you have in mind</li>
+        </ul>
+      </div>
+      <hr class="border-line" />
+      <div>
+        <p class="text-xs uppercase tracking-[0.14em] text-subtle">Booking Policy</p>
+        <ul class="mt-4 space-y-3 text-body">
+          <li>A 30% non-refundable deposit secures your date — 50% for bridal.</li>
+          <li>Forty-eight hours notice for any changes or cancellations.</li>
+          <li>One reschedule permitted, subject to availability.</li>
+          <li>Balance is due on the day; 2–4 weeks before for bridal.</li>
+        </ul>
+      </div>
+      <hr class="border-line" />
+      <div>
+        <p class="text-xs uppercase tracking-[0.14em] text-subtle">Coverage</p>
+        <p class="mt-4 text-body">
+          Based in Oxford. Oxfordshire and the surrounding counties as standard; national and international travel available for weddings and shoots.
+        </p>
+      </div>
+      <hr class="border-line" />
+      <div>
+        <p class="text-xs uppercase tracking-[0.14em] text-subtle">Elsewhere</p>
+        <ul class="mt-4 space-y-2">
+          <li><a class="text-ink underline" href="mailto:hello@elishamccoy.com">hello@elishamccoy.com</a></li>
+          <li><a class="text-ink underline" href="https://instagram.com/elishaamccoy">Instagram — @elishaamccoy</a></li>
+          <li><a class="text-ink underline" href="https://tiktok.com/@elishamacs">TikTok — @elishamacs</a></li>
+        </ul>
+      </div>
+    </aside>
+  </section>
+
+  <section class="bg-panel px-6 py-16 text-center sm:px-10 lg:px-16 lg:py-20">
+    <p class="text-xs uppercase tracking-[0.14em] text-subtle">Travel &amp; Coverage</p>
+    <p class="mx-auto mt-4 max-w-2xl text-body">
+      Standard coverage is Oxfordshire and the surrounding counties. I travel nationally and internationally for weddings and editorial — just ask.
+    </p>
+  </section>
+</BaseLayout>
+
+<script>
+  const form = document.getElementById("enquiry-form") as HTMLFormElement | null;
+  const status = document.getElementById("form-status");
+
+  form?.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const invalid = form.querySelector<HTMLElement>(":invalid, [aria-invalid='true']");
+    if (!form.checkValidity()) {
+      invalid?.focus();
+      if (status) status.textContent = "Please check the highlighted fields and try again.";
+      return;
+    }
+    if (status) status.textContent = "Thanks — your enquiry has been noted. This demo form does not send email yet.";
+    form.reset();
+  });
+</script>

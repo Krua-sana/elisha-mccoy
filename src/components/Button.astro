@@ -1,0 +1,32 @@
+---
+interface Props {
+  href?: string;
+  variant?: "primary" | "secondary" | "text";
+  class?: string;
+  type?: "button" | "submit" | "reset";
+}
+
+const { href, variant = "primary", class: className = "", type, ...rest } = Astro.props;
+const Tag = href ? "a" : "button";
+
+const base =
+  "inline-flex items-center gap-2 rounded-none uppercase text-[11px] font-medium transition-colors";
+const tracking = "tracking-[0.14em]";
+
+const variants: Record<string, string> = {
+  primary:
+    "min-h-11 px-7 bg-accent text-onband hover:bg-ink justify-center",
+  secondary:
+    "min-h-11 px-7 border border-accent text-ink hover:bg-accent hover:text-onband justify-center",
+  text: "text-link underline underline-offset-4 hover:text-ink min-h-11",
+};
+---
+
+<Tag
+  href={href}
+  type={!href ? (type ?? "button") : undefined}
+  class={`${base} ${tracking} ${variants[variant]} ${className}`}
+  {...rest}
+>
+  <slot />
+</Tag>

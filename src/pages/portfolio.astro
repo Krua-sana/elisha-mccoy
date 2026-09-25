@@ -1,0 +1,126 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Button from "../components/Button.astro";
+import { Image } from "astro:assets";
+
+import bridalVeil from "../assets/photos/bridal-veil-portrait.jpeg";
+import bridalGolden from "../assets/photos/bridal-golden-hour-portrait.png";
+import bridalBouquet from "../assets/photos/bridal-bouquet-detail.png";
+import bridalGloves from "../assets/photos/bridal-gloves-detail.png";
+import bridalHair from "../assets/photos/bridal-hair-accessories.png";
+import glamSultry from "../assets/photos/glam-sultry-portrait.png";
+import glamSmoky from "../assets/photos/glam-smoky-eye-closeup.jpg";
+import glamSmiling from "../assets/photos/natural-glam-smiling-portrait.jpg";
+import glamNatural from "../assets/photos/natural-glam-portrait.jpeg";
+import editorialProfile from "../assets/photos/editorial-profile-portrait.jpeg";
+import editorialDark from "../assets/photos/editorial-dark-profile-portrait.png";
+import stillVase from "../assets/photos/still-life-flower-vase.png";
+import stillPerfume from "../assets/photos/still-life-perfume.png";
+import appDetail from "../assets/photos/makeup-application-detail.png";
+
+const filters = ["All", "Bridal", "Occasion", "Editorial", "Creative", "Prom"];
+
+const gallery = [
+  { image: bridalVeil, alt: "Bridal makeup with veil by Elisha McCoy, Oxfordshire", cat: "Bridal" },
+  { image: editorialDark, alt: "Dramatic editorial makeup portrait by Elisha McCoy", cat: "Editorial" },
+  { image: glamSmiling, alt: "Natural glam bridal makeup, smiling portrait", cat: "Bridal" },
+  { image: stillVase, alt: "Still life floral styling detail", cat: "Creative" },
+  { image: bridalGolden, alt: "Golden hour bridal makeup portrait by Elisha McCoy", cat: "Bridal" },
+  { image: glamSultry, alt: "Full glam evening makeup by Elisha McCoy", cat: "Occasion" },
+  { image: bridalGloves, alt: "Bridal gloves and lavender styling detail", cat: "Bridal" },
+  { image: editorialProfile, alt: "Editorial side-profile makeup portrait by Elisha McCoy", cat: "Editorial" },
+  { image: glamSmoky, alt: "Smoky eye glam makeup close-up by Elisha McCoy", cat: "Occasion" },
+  { image: bridalHair, alt: "Bridal hair accessories detail, pearl and gold", cat: "Bridal" },
+  { image: glamNatural, alt: "Natural glam makeup portrait by Elisha McCoy", cat: "Prom" },
+  { image: stillPerfume, alt: "Beauty styling still life detail", cat: "Creative" },
+  { image: appDetail, alt: "Makeup application in progress by Elisha McCoy", cat: "Occasion" },
+  { image: bridalBouquet, alt: "Bridal bouquet detail from a wedding by Elisha McCoy", cat: "Bridal" },
+];
+---
+
+<BaseLayout
+  title="Makeup Artist Portfolio | Bridal & Editorial | Oxfordshire"
+  description="Explore Elisha McCoy's makeup portfolio, featuring bridal, wedding, occasion, prom, editorial, photoshoot and creative makeup across Oxfordshire."
+>
+  <section class="px-6 pt-16 sm:px-10 lg:px-16 lg:pt-24">
+    <p class="text-xs uppercase tracking-[0.14em] text-subtle">Portfolio</p>
+    <h1 class="mt-3">
+      <span class="block text-base font-ui font-normal normal-case tracking-normal text-subtle sm:text-lg">
+        Bridal &amp; Editorial Makeup Portfolio
+      </span>
+      <span class="mt-2 block font-header text-3xl text-ink sm:text-4xl">Makeup Artist Portfolio</span>
+    </h1>
+    <p class="mt-6 max-w-2xl text-body">
+      A selection of recent work across bridal, occasion, editorial, prom and creative makeup in Oxfordshire and beyond.
+    </p>
+
+    <div role="tablist" aria-label="Filter portfolio by category" class="mt-10 flex flex-wrap gap-8 border-b border-line pb-2">
+      {filters.map((f, i) => (
+        <button
+          type="button"
+          role="tab"
+          aria-selected={i === 0 ? "true" : "false"}
+          data-filter={f}
+          class:list={[
+            "filter-tab min-h-11 border-b-2 px-1 text-xs uppercase tracking-[0.14em]",
+            i === 0 ? "border-ink text-ink" : "border-transparent text-subtle hover:text-ink",
+          ]}
+        >
+          {f}
+        </button>
+      ))}
+    </div>
+  </section>
+
+  <section class="px-6 py-10 sm:px-10 lg:px-16">
+    <div id="gallery" class="columns-1 gap-4 sm:columns-2 lg:columns-3">
+      {gallery.map((item) => (
+        <div class="gallery-item mb-4 break-inside-avoid" data-cat={item.cat}>
+          <Image
+            src={item.image}
+            alt={item.alt}
+            class="w-full object-cover"
+            widths={[421, 842]}
+            sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
+          />
+          <p class="mt-2 text-xs uppercase tracking-[0.14em] text-subtle">{item.cat}</p>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <section class="bg-ink px-6 py-20 text-center sm:px-10 lg:px-16 lg:py-28">
+    <p class="text-xs uppercase tracking-[0.14em] text-onbandmuted">Next</p>
+    <h2 class="mx-auto mt-4 max-w-2xl font-header text-3xl text-onband sm:text-4xl">Like what you see?</h2>
+    <p class="mx-auto mt-4 max-w-xl text-onbandmuted">
+      Tell me your date and what you're planning, and I'll be in touch about availability.
+    </p>
+    <div class="mt-8">
+      <Button href="/contact/" variant="primary">Start an Enquiry</Button>
+    </div>
+  </section>
+</BaseLayout>
+
+<script>
+  const tabs = document.querySelectorAll<HTMLButtonElement>(".filter-tab");
+  const items = document.querySelectorAll<HTMLElement>(".gallery-item");
+
+  tabs.forEach((tab) => {
+    tab.addEventListener("click", () => {
+      tabs.forEach((t) => {
+        t.setAttribute("aria-selected", "false");
+        t.classList.remove("border-ink", "text-ink");
+        t.classList.add("border-transparent", "text-subtle");
+      });
+      tab.setAttribute("aria-selected", "true");
+      tab.classList.add("border-ink", "text-ink");
+      tab.classList.remove("border-transparent", "text-subtle");
+
+      const filter = tab.dataset.filter;
+      items.forEach((item) => {
+        const show = filter === "All" || item.dataset.cat === filter;
+        item.hidden = !show;
+      });
+    });
+  });
+</script>

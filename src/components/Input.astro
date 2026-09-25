@@ -1,0 +1,61 @@
+---
+interface Props {
+  id: string;
+  name?: string;
+  label: string;
+  type?: string;
+  required?: boolean;
+  helper?: string;
+  error?: string;
+  placeholder?: string;
+}
+
+const {
+  id,
+  name = id,
+  label,
+  type = "text",
+  required = false,
+  helper,
+  error,
+  placeholder,
+} = Astro.props;
+
+const describedBy =
+  [helper ? `${id}-helper` : null, error ? `${id}-error` : null]
+    .filter(Boolean)
+    .join(" ") || undefined;
+---
+
+<div>
+  <label for={id} class="block text-sm font-medium text-ink">
+    {label}
+    {required ? (
+      <span class="text-danger"> (required)</span>
+    ) : (
+      <span class="text-subtle"> (optional)</span>
+    )}
+  </label>
+  {helper && (
+    <p id={`${id}-helper`} class="mt-1 text-xs text-subtle">{helper}</p>
+  )}
+  <input
+    id={id}
+    name={name}
+    type={type}
+    required={required}
+    placeholder={placeholder}
+    aria-describedby={describedBy}
+    aria-invalid={error ? "true" : undefined}
+    class:list={[
+      "mt-2 min-h-13 w-full rounded-none border bg-panel px-4 text-ink placeholder:text-subtle focus:outline-none focus:ring-2 focus:ring-ink",
+      error ? "border-danger" : "border-field",
+    ]}
+    style="min-height:52px;"
+  />
+  {error && (
+    <p id={`${id}-error`} class="mt-2 flex items-center gap-1 text-sm text-danger" role="alert">
+      <span aria-hidden="true">⚠</span> {error}
+    </p>
+  )}
+</div>

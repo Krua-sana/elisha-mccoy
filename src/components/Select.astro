@@ -1,0 +1,31 @@
+---
+interface Props {
+  id: string;
+  name?: string;
+  label: string;
+  required?: boolean;
+  options: string[];
+}
+const { id, name = id, label, required = false, options } = Astro.props;
+---
+
+<div>
+  <label for={id} class="block text-sm font-medium text-ink">
+    {label}
+    {required ? (
+      <span class="text-danger"> (required)</span>
+    ) : (
+      <span class="text-subtle"> (optional)</span>
+    )}
+  </label>
+  <select
+    id={id}
+    name={name}
+    required={required}
+    class="mt-2 w-full appearance-none rounded-none border border-field bg-panel bg-[url('data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2212%22%20height%3D%228%22%20viewBox%3D%220%200%2012%208%22%3E%3Cpath%20d%3D%22M1%201l5%205%205-5%22%20stroke%3D%22%231e1b17%22%20stroke-width%3D%222%22%20fill%3D%22none%22%2F%3E%3C%2Fsvg%3E')] bg-[right_1rem_center] bg-no-repeat px-4 text-ink focus:outline-none focus:ring-2 focus:ring-ink"
+    style="min-height:52px;"
+  >
+    <option value="" selected disabled>Select an option</option>
+    {options.map((opt) => <option value={opt}>{opt}</option>)}
+  </select>
+</div>

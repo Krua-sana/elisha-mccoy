@@ -1,0 +1,22 @@
+---
+interface Props {
+  id: string;
+  name?: string;
+  required?: boolean;
+}
+const { id, name = id, required = false } = Astro.props;
+---
+
+<div class="flex items-start gap-3">
+  <input
+    id={id}
+    name={name}
+    type="checkbox"
+    required={required}
+    class="mt-0.5 h-5 w-5 shrink-0 rounded-none border border-field text-accent focus:outline-none focus:ring-2 focus:ring-ink"
+  />
+  <label for={id} class="text-sm text-body">
+    I agree to the <a href="/privacy-policy/" class="text-link underline">Privacy Policy</a> and consent to being contacted about my enquiry.
+    {required && <span class="text-danger"> (required)</span>}
+  </label>
+</div>

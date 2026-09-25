@@ -1,0 +1,21 @@
+---
+interface Props {
+  quote: string;
+  name: string;
+  role: string;
+}
+const { quote, name, role } = Astro.props;
+---
+
+<figure class="bg-band px-6 py-16 sm:px-16">
+  <div class="mx-auto max-w-4xl">
+    <span class="font-header text-5xl text-onband" aria-hidden="true">&ldquo;</span>
+    <blockquote class="mt-2">
+      <p class="font-header text-xl italic leading-relaxed text-onband sm:text-2xl">{quote}</p>
+    </blockquote>
+    <figcaption class="mt-6 text-sm text-onband">
+      <span class="font-medium">— {name.toUpperCase()}</span>
+      <span class="ml-2 uppercase tracking-[0.14em] text-onbandmuted">{role}</span>
+    </figcaption>
+  </div>
+</figure>

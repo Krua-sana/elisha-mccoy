@@ -1,17 +1,142 @@
 ---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Button from "../components/Button.astro";
+import ServiceCard from "../components/ServiceCard.astro";
+import PortfolioCard from "../components/PortfolioCard.astro";
+import TestimonialCard from "../components/TestimonialCard.astro";
+import { Image } from "astro:assets";
 
+import heroPhoto from "../assets/photos/bridal-golden-hour-portrait.png";
+import aboutPortrait from "../assets/photos/natural-glam-portrait.jpeg";
+import svcBridal from "../assets/photos/bridal-veil-portrait.jpeg";
+import svcGlam from "../assets/photos/glam-sultry-portrait.png";
+import svcEditorial from "../assets/photos/editorial-profile-portrait.jpeg";
+import svcPersonal from "../assets/photos/glam-smoky-eye-closeup.jpg";
+import p1 from "../assets/photos/bridal-bouquet-detail.png";
+import p2 from "../assets/photos/editorial-dark-profile-portrait.png";
+import p3 from "../assets/photos/still-life-flower-vase.png";
+import p4 from "../assets/photos/bridal-hair-accessories.png";
+import p5 from "../assets/photos/natural-glam-smiling-portrait.jpg";
+import p6 from "../assets/photos/still-life-perfume.png";
+
+const services = [
+  { number: "01", title: "Bridal & Wedding", copy: "Trials, wedding day artistry and the whole bridal party, held calmly from first look to last dance.", image: svcBridal, alt: "Bridal makeup by Elisha McCoy, Oxfordshire — bride wearing a veil with soft, natural makeup" },
+  { number: "02", title: "Glam & Occasion", copy: "Soft glam to full evening glamour for birthdays, galas, parties and every moment worth marking.", image: svcGlam, alt: "Full glam evening makeup by Elisha McCoy, Oxfordshire" },
+  { number: "03", title: "Editorial & Creative", copy: "Photoshoots, campaigns and concept-led looks built to hold up under a lens and on screen.", image: svcEditorial, alt: "Editorial makeup portrait by Elisha McCoy, Oxfordshire" },
+  { number: "04", title: "Personal & Lessons", copy: "Consultations, makeup lessons and personal branding sessions, tailored entirely to your face.", image: svcPersonal, alt: "Close-up glam makeup detail by Elisha McCoy, Oxfordshire" },
+];
+
+const portfolio = [
+  { image: p1, alt: "Bridal bouquet detail from a wedding styled by Elisha McCoy" },
+  { image: p2, alt: "Editorial makeup portrait, dramatic side profile, by Elisha McCoy" },
+  { image: p3, alt: "Still life floral styling detail, Elisha McCoy portfolio" },
+  { image: p4, alt: "Bridal hair accessories detail, Elisha McCoy portfolio" },
+  { image: p5, alt: "Natural glam bridal makeup by Elisha McCoy, Oxfordshire" },
+  { image: p6, alt: "Still life beauty styling detail, Elisha McCoy portfolio" },
+];
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<BaseLayout
+  title="Makeup Artist Oxfordshire | Elisha McCoy"
+  description="Freelance makeup artist based in Oxfordshire, offering luxury bridal, occasion, editorial and on-location makeup services across Oxfordshire and beyond."
+>
+  <section class="grid grid-cols-1 lg:grid-cols-2">
+    <div class="flex flex-col justify-center px-6 py-16 sm:px-10 lg:px-16 lg:py-0">
+      <p class="text-xs uppercase tracking-[0.14em] text-subtle">Makeup Artist</p>
+      <h1 class="mt-3">
+        <span class="block text-base font-ui font-normal normal-case tracking-normal text-subtle sm:text-lg">
+          Freelance Makeup Artist in Oxfordshire
+        </span>
+        <span class="mt-2 block font-header text-4xl uppercase leading-[1.05] text-ink sm:text-5xl lg:text-6xl">
+          Makeup that feels like you.
+        </span>
+      </h1>
+      <hr class="my-6 w-14 border-line" />
+      <p class="max-w-sm text-body">
+        Luxury makeup artistry for bridal, occasion, editorial and creative work — on-location across Oxfordshire and beyond.
+      </p>
+      <div class="mt-9 flex flex-wrap items-center gap-8">
+        <Button href="/contact/" variant="primary">Book a Consultation</Button>
+        <Button href="/portfolio/" variant="text">View Portfolio →</Button>
+      </div>
+      <p class="mt-10 text-xs uppercase tracking-[0.14em] text-subtle">
+        Oxfordshire · UK · Available for Travel
+      </p>
+    </div>
+    <div class="aspect-[4/3] lg:aspect-auto">
+      <Image
+        src={heroPhoto}
+        alt="Bridal makeup by Elisha McCoy, on-location makeup artist in Oxfordshire"
+        class="h-full w-full object-cover"
+        widths={[720, 1440]}
+        sizes="(min-width: 1024px) 50vw, 100vw"
+        priority
+      />
+    </div>
+  </section>
+
+  <section class="mx-auto grid max-w-[1440px] grid-cols-1 gap-10 px-6 py-20 sm:px-10 lg:grid-cols-2 lg:px-16 lg:py-28">
+    <div class="order-2 lg:order-1">
+      <Image src={aboutPortrait} alt="Portrait of Elisha McCoy, freelance makeup artist in Oxfordshire" class="h-full w-full object-cover" widths={[600, 1200]} sizes="(min-width: 1024px) 45vw, 100vw" />
+    </div>
+    <div class="order-1 flex flex-col justify-center lg:order-2">
+      <p class="text-xs uppercase tracking-[0.14em] text-subtle">About Elisha</p>
+      <h2 class="mt-3 font-header text-3xl text-ink sm:text-4xl">Elevated beauty. Effortless confidence.</h2>
+      <p class="mt-6 max-w-lg font-header text-lg leading-relaxed text-body">
+        I create timeless, refined makeup that enhances your natural beauty and makes you feel completely like yourself — only more confident.
+      </p>
+      <p class="mt-4 max-w-lg font-header text-lg leading-relaxed text-body">
+        With a calm, professional approach and an eye for detail, I bring a luxury experience to every client and every occasion.
+      </p>
+      <Button href="/about/" variant="text" class="mt-8 self-start">Learn more about me →</Button>
+    </div>
+  </section>
+
+  <section class="bg-panel px-6 py-20 sm:px-10 lg:px-16 lg:py-28">
+    <div class="mx-auto max-w-[1440px]">
+      <div class="flex flex-wrap items-end justify-between gap-6">
+        <div>
+          <p class="text-xs uppercase tracking-[0.14em] text-subtle">Services</p>
+          <h2 class="mt-3 max-w-2xl font-header text-3xl text-ink sm:text-4xl">Tailored artistry for every occasion.</h2>
+        </div>
+        <Button href="/services/" variant="text">All Services →</Button>
+      </div>
+      <div class="mt-12 grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-4">
+        {services.map((s) => <ServiceCard number={s.number} title={s.title} copy={s.copy} image={s.image} alt={s.alt} />)}
+      </div>
+    </div>
+  </section>
+
+  <section class="px-6 py-20 sm:px-10 lg:px-16 lg:py-28">
+    <div class="mx-auto max-w-[1440px]">
+      <div class="flex flex-wrap items-end justify-between gap-6">
+        <div>
+          <p class="text-xs uppercase tracking-[0.14em] text-subtle">Portfolio</p>
+          <h2 class="mt-3 font-header text-3xl text-ink sm:text-4xl">A selection of recent work.</h2>
+        </div>
+        <Button href="/portfolio/" variant="text">View Full Portfolio →</Button>
+      </div>
+      <div class="mt-12 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-6">
+        {portfolio.map((p) => (
+          <div class="aspect-[3/4] overflow-hidden">
+            <Image src={p.image} alt={p.alt} class="h-full w-full object-cover" widths={[240, 480]} sizes="(min-width: 1024px) 16vw, 33vw" />
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <TestimonialCard
+    quote="Elisha is a true professional. She made me feel so relaxed and created the most beautiful, natural look."
+    name="Sophie H."
+    role="Bride"
+  />
+
+  <section class="bg-ink px-6 py-20 text-center sm:px-10 lg:px-16 lg:py-28">
+    <p class="text-xs uppercase tracking-[0.14em] text-onbandmuted">Enquiries</p>
+    <h2 class="mx-auto mt-4 max-w-2xl font-header text-3xl text-onband sm:text-4xl">Let's create your look.</h2>
+    <div class="mt-8">
+      <Button href="/contact/" variant="primary">Start an Enquiry</Button>
+    </div>
+  </section>
+</BaseLayout>

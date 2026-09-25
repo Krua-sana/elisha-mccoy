@@ -1,1 +1,56 @@
 @import "tailwindcss";
+@import "@fontsource/courier-prime";
+@import "@fontsource/courier-prime/700.css";
+@import "@fontsource-variable/inter";
+
+@theme {
+  --color-canvas: #f1ede5;
+  --color-panel: #f2efea;
+  --color-ink: #1e1b17;
+  --color-muted: #7a756f;
+  --color-accent: #9b8168;
+  --color-band: #b9ab9c;
+  --color-onband: #f3eee4;
+  --color-onbandmuted: #e4dbce;
+  --color-line: #dcd4c7;
+  --color-body: #575049;
+  --color-subtle: #635b54;
+  --color-link: #7a5e44;
+  --color-field: #7d756c;
+  --color-danger: #9e2b25;
+
+  --font-header: "Courier Prime", ui-monospace, "Courier New", monospace;
+  --font-ui: "Inter Variable", "Inter", ui-sans-serif, system-ui, sans-serif;
+
+  --tracking-wide-ui: 0.14em;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    background-color: var(--color-canvas);
+    color: var(--color-ink);
+    font-family: var(--font-ui);
+  }
+  h1, h2, h3, h4, .font-header {
+    font-family: var(--font-header);
+  }
+}
+
+@layer utilities {
+  .skip-link {
+    position: absolute;
+    left: -9999px;
+    top: 0;
+    z-index: 100;
+    background: var(--color-ink);
+    color: var(--color-canvas);
+    padding: 0.75rem 1.25rem;
+  }
+  .skip-link:focus {
+    left: 1rem;
+    top: 1rem;
+  }
+}

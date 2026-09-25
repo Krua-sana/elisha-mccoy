@@ -1,0 +1,79 @@
+---
+import Tag from "./Tag.astro";
+import logo from "../assets/logo/logo.png";
+import { Image } from "astro:assets";
+
+const nav = [
+  { href: "/", label: "Home" },
+  { href: "/about/", label: "About" },
+  { href: "/services/", label: "Services" },
+  { href: "/portfolio/", label: "Portfolio" },
+  { href: "/contact/", label: "Contact" },
+];
+
+const path = Astro.url.pathname;
+const isActive = (href: string) =>
+  href === "/" ? path === "/" : path.startsWith(href);
+---
+
+<header class="relative bg-canvas">
+  <div class="mx-auto flex h-26 max-w-[1440px] items-center justify-between px-4 sm:px-8 lg:justify-center lg:px-16" style="height:6.5rem;">
+    <a href="/" class="flex items-center" aria-label="Elisha McCoy — home">
+      <Image src={logo} alt="Elisha McCoy" width={106} height={44} />
+    </a>
+
+    <nav aria-label="Primary" class="hidden lg:flex lg:absolute lg:right-16 lg:top-1/2 lg:-translate-y-1/2 lg:gap-10">
+      {nav.map((item) => (
+        <Tag href={item.href} active={isActive(item.href)}>{item.label}</Tag>
+      ))}
+    </nav>
+
+    <button
+      id="menu-toggle"
+      type="button"
+      class="min-h-11 min-w-11 flex items-center justify-center lg:hidden"
+      aria-expanded="false"
+      aria-controls="mobile-nav"
+      aria-label="Open menu"
+    >
+      <svg width="22" height="16" viewBox="0 0 22 16" fill="none" aria-hidden="true">
+        <path d="M0 1H22" stroke="#1e1b17" stroke-width="2"/>
+        <path d="M0 8H22" stroke="#1e1b17" stroke-width="2"/>
+        <path d="M0 15H22" stroke="#1e1b17" stroke-width="2"/>
+      </svg>
+    </button>
+  </div>
+
+  <nav
+    id="mobile-nav"
+    aria-label="Mobile"
+    class="hidden lg:hidden border-t border-line bg-canvas px-6 pb-6"
+  >
+    <ul class="flex flex-col gap-1 pt-4">
+      {nav.map((item) => (
+        <li>
+          <a
+            href={item.href}
+            aria-current={isActive(item.href) ? "page" : undefined}
+            class:list={[
+              "flex min-h-11 items-center uppercase text-sm tracking-[0.14em]",
+              isActive(item.href) ? "text-ink font-medium" : "text-subtle",
+            ]}
+          >
+            {item.label}
+          </a>
+        </li>
+      ))}
+    </ul>
+  </nav>
+</header>
+
+<script>
+  const toggle = document.getElementById("menu-toggle");
+  const nav = document.getElementById("mobile-nav");
+  toggle?.addEventListener("click", () => {
+    const open = nav?.classList.toggle("hidden") === false;
+    toggle.setAttribute("aria-expanded", String(open));
+    toggle.setAttribute("aria-label", open ? "Close menu" : "Open menu");
+  });
+</script>

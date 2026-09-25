@@ -1,0 +1,29 @@
+---
+import { Image } from "astro:assets";
+
+interface Props {
+  number: string;
+  title: string;
+  copy: string;
+  image: ImageMetadata;
+  alt: string;
+  href?: string;
+}
+
+const { number, title, copy, image, alt, href = "/services/" } = Astro.props;
+---
+
+<a href={href} class="group block">
+  <div class="aspect-[4/5] overflow-hidden bg-line">
+    <Image
+      src={image}
+      alt={alt}
+      class="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
+      widths={[308, 616]}
+      sizes="(min-width: 1024px) 308px, 90vw"
+    />
+  </div>
+  <p class="mt-5 text-xs text-subtle">{number}</p>
+  <h3 class="mt-2 font-header text-xl text-ink">{title}</h3>
+  <p class="mt-2 text-sm text-body">{copy}</p>
+</a>

@@ -1,0 +1,103 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Button from "../components/Button.astro";
+import { Image } from "astro:assets";
+
+import heroPortrait from "../assets/photos/glam-sultry-portrait.png";
+import storyPortrait from "../assets/photos/natural-glam-smiling-portrait.jpg";
+import stillLife from "../assets/photos/still-life-flower-vase.png";
+
+const steps = [
+  { n: "01", title: "Say hello", copy: "Send me your date, location and what you're getting ready for. I'll come back with availability and a quote — pricing is always bespoke, never off a list." },
+  { n: "02", title: "The trial", copy: "For bridal and bigger looks we meet beforehand to test and tweak until it's exactly right. You leave with notes and a clear plan for the day." },
+  { n: "03", title: "On the day", copy: "I arrive with everything, set up calmly and keep to time. Clean brushes, sanitised products, and an unhurried chair for you and your party." },
+  { n: "04", title: "Afterwards", copy: "A few touch-up essentials to take with you, simple aftercare, and I'm on email whenever you need me for the next one." },
+];
+---
+
+<BaseLayout
+  title="About Elisha McCoy | Makeup Artist Oxfordshire"
+  description="Meet Elisha McCoy, a freelance makeup artist based in Oxfordshire, specialising in personalised bridal, occasion, editorial and on-location makeup."
+>
+  <section class="grid grid-cols-1 lg:grid-cols-2">
+    <div class="aspect-[4/3] lg:aspect-auto">
+      <Image src={heroPortrait} alt="Portrait of Elisha McCoy, freelance makeup artist based in Oxfordshire" class="h-full w-full object-cover" widths={[600, 1200]} sizes="(min-width: 1024px) 50vw, 100vw" priority />
+    </div>
+    <div class="flex flex-col justify-center px-6 py-16 sm:px-10 lg:px-16 lg:py-0">
+      <p class="text-xs uppercase tracking-[0.14em] text-subtle">My Story</p>
+      <h1 class="mt-3">
+        <span class="block text-base font-ui font-normal normal-case tracking-normal text-subtle sm:text-lg">
+          Meet Elisha McCoy — Freelance Makeup Artist
+        </span>
+        <span class="mt-2 block font-header text-4xl text-ink sm:text-5xl">Hi, I'm Elisha.</span>
+      </h1>
+      <p class="mt-6 max-w-md text-body">
+        A freelance, on-location makeup artist based in Oxfordshire — bridal, occasion, editorial and personal branding, wherever you need me.
+      </p>
+      <div class="mt-9 flex flex-wrap items-center gap-8">
+        <Button href="/contact/" variant="secondary">Book a Consultation</Button>
+        <Button href="/portfolio/" variant="text">View Portfolio →</Button>
+      </div>
+      <p class="mt-10 text-xs uppercase tracking-[0.14em] text-subtle">Oxfordshire · UK · Available for Travel</p>
+    </div>
+  </section>
+
+  <section class="mx-auto grid max-w-[1440px] grid-cols-1 gap-10 px-6 py-20 sm:px-10 lg:grid-cols-3 lg:px-16 lg:py-28">
+    <div>
+      <Image src={storyPortrait} alt="Elisha McCoy, makeup artist, smiling portrait" class="h-full w-full object-cover" widths={[400, 800]} sizes="(min-width: 1024px) 30vw, 100vw" />
+    </div>
+    <div class="lg:col-span-1">
+      <p class="text-xs uppercase tracking-[0.14em] text-subtle">My Story</p>
+      <h2 class="mt-3 font-header text-3xl text-ink">How I got here.</h2>
+      <div class="mt-6 space-y-5 font-header text-lg leading-relaxed text-body">
+        <p>I started out on the beauty counters. Counter work is a brilliant teacher: colour-matching in every light, a hundred different faces a day, and no room for a heavy hand.</p>
+        <p>What I loved most was the conversation before the makeup — really hearing what someone wanted, then watching them sit up a little straighter once it was done. I wanted more of that, and more time to do it properly.</p>
+        <p>So in 2025 I went out on my own. Now it's one client at a time, from a calmer chair — bridal, occasion and editorial across Oxfordshire and wherever the work leads. Same standards, far more time for you.</p>
+      </div>
+      <Button href="/services/" variant="text" class="mt-6">See what I offer →</Button>
+    </div>
+    <div class="hidden lg:block">
+      <Image src={stillLife} alt="Still life floral styling in Elisha McCoy's studio" class="h-full w-full object-cover" widths={[400, 800]} sizes="30vw" />
+    </div>
+  </section>
+
+  <section class="bg-panel px-6 py-20 sm:px-10 lg:px-16 lg:py-28">
+    <div class="mx-auto max-w-[1440px]">
+      <p class="text-xs uppercase tracking-[0.14em] text-subtle">What to Expect</p>
+      <div class="mt-3 flex flex-wrap items-end justify-between gap-6">
+        <h2 class="max-w-lg font-header text-3xl text-ink sm:text-4xl">How a booking works.</h2>
+        <Button href="/contact/" variant="text">Start an enquiry →</Button>
+      </div>
+      <div class="mt-14 grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-4">
+        {steps.map((s) => (
+          <div class="border-t border-line pt-5">
+            <p class="text-xs text-subtle">{s.n}</p>
+            <h3 class="mt-3 font-header text-xl text-ink">{s.title}</h3>
+            <p class="mt-3 text-sm text-body">{s.copy}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="px-6 py-20 text-center sm:px-10 lg:px-16 lg:py-28">
+    <p class="text-xs uppercase tracking-[0.14em] text-subtle">Travel &amp; Coverage</p>
+    <p class="mx-auto mt-5 max-w-2xl text-body">
+      Based in Oxford. I cover all of Oxfordshire and the surrounding counties as standard, and I travel nationally and internationally for weddings and editorial.
+    </p>
+    <p class="mx-auto mt-6 max-w-3xl text-xs uppercase tracking-[0.14em] text-subtle">
+      Oxford · The Cotswolds · London · Buckinghamshire · Berkshire · Warwickshire · Destination
+    </p>
+  </section>
+
+  <section class="bg-ink px-6 py-20 text-center sm:px-10 lg:px-16 lg:py-28">
+    <p class="text-xs uppercase tracking-[0.14em] text-onbandmuted">Enquiries</p>
+    <h2 class="mx-auto mt-4 max-w-2xl font-header text-3xl text-onband sm:text-4xl">Let's talk about your special day.</h2>
+    <div class="mt-8">
+      <Button href="/contact/" variant="primary">Start an Enquiry</Button>
+    </div>
+    <p class="mt-6 text-sm">
+      <a href="mailto:hello@elishamccoy.com" class="text-onband underline">hello@elishamccoy.com</a>
+    </p>
+  </section>
+</BaseLayout>

@@ -1,0 +1,27 @@
+---
+import { Image } from "astro:assets";
+
+interface Props {
+  image: ImageMetadata;
+  alt: string;
+  caption?: string;
+  category?: string;
+}
+
+const { image, alt, caption, category } = Astro.props;
+---
+
+<figure class="mb-4 break-inside-avoid">
+  <Image
+    src={image}
+    alt={alt}
+    class="w-full object-cover"
+    widths={[421, 842]}
+    sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
+  />
+  {caption && (
+    <figcaption class="mt-2 text-xs uppercase tracking-[0.14em] text-subtle">
+      {category && <span class="text-ink">{category}</span>}{category && " — "}{caption}
+    </figcaption>
+  )}
+</figure>

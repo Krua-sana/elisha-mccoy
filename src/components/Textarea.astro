@@ -1,0 +1,33 @@
+---
+interface Props {
+  id: string;
+  name?: string;
+  label: string;
+  required?: boolean;
+  helper?: string;
+  rows?: number;
+}
+const { id, name = id, label, required = false, helper, rows = 5 } = Astro.props;
+---
+
+<div>
+  <label for={id} class="block text-sm font-medium text-ink">
+    {label}
+    {required ? (
+      <span class="text-danger"> (required)</span>
+    ) : (
+      <span class="text-subtle"> (optional)</span>
+    )}
+  </label>
+  {helper && (
+    <p id={`${id}-helper`} class="mt-1 text-xs text-subtle">{helper}</p>
+  )}
+  <textarea
+    id={id}
+    name={name}
+    required={required}
+    rows={rows}
+    aria-describedby={helper ? `${id}-helper` : undefined}
+    class="mt-2 w-full rounded-none border border-field bg-panel px-4 py-3 text-ink placeholder:text-subtle focus:outline-none focus:ring-2 focus:ring-ink"
+  ></textarea>
+</div>
