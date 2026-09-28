@@ -5,7 +5,9 @@ import tailwindcss from '@tailwindcss/vite';
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://www.elishamccoy.com',
+  // site: 'https://www.elishamccoy.com',
+  site: 'https://krua-sana.github.io',
+  base: '/elisha-mccoy/',
   devToolbar: {
     enabled: false
   },
