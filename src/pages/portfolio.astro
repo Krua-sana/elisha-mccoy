@@ -4,37 +4,31 @@ import Button from "../components/Button.astro";
 import { Image } from "astro:assets";
 
 import bridalVeil from "../assets/photos/bridal-veil-portrait.jpeg";
-import bridalGolden from "../assets/photos/bridal-golden-hour-portrait.png";
+import bridalPhoto3 from "../assets/photos/bridal_photo_3.png";
+import bridalPhoto4 from "../assets/photos/bridal_photo_4.png";
 import bridalBouquet from "../assets/photos/bridal-bouquet-detail.png";
-import bridalGloves from "../assets/photos/bridal-gloves-detail.png";
-import bridalHair from "../assets/photos/bridal-hair-accessories.png";
-import glamSultry from "../assets/photos/glam-sultry-portrait.png";
-import glamSmoky from "../assets/photos/glam-smoky-eye-closeup.jpg";
-import glamSmiling from "../assets/photos/natural-glam-smiling-portrait.jpg";
-import glamNatural from "../assets/photos/natural-glam-portrait.jpeg";
+import elishaPortfolio3 from "../assets/photos/elisha_portfolio_3.png";
+import bridalPhoto5 from "../assets/photos/bridal_photo_5.png";
+import elishaPortfolio4 from "../assets/photos/elisha_portfolio_4.png";
 import editorialProfile from "../assets/photos/editorial-profile-portrait.jpeg";
-import editorialDark from "../assets/photos/editorial-dark-profile-portrait.png";
-import stillVase from "../assets/photos/still-life-flower-vase.png";
-import stillPerfume from "../assets/photos/still-life-perfume.png";
-import appDetail from "../assets/photos/makeup-application-detail.png";
+import glamSultry from "../assets/photos/glam-sultry-portrait.png";
+import creativePhoto from "../assets/photos/creative_photo.png";
+import editorialPhoto1 from "../assets/photos/editorial_photo_1.png";
 
-const filters = ["All", "Bridal", "Occasion", "Editorial", "Creative", "Prom"];
+const filters = ["All", "Bridal", "Occasion", "Creative", "Prom"];
 
 const gallery = [
   { image: bridalVeil, alt: "Bridal makeup with veil by Elisha McCoy, Oxfordshire", cat: "Bridal" },
-  { image: editorialDark, alt: "Dramatic editorial makeup portrait by Elisha McCoy", cat: "Editorial" },
-  { image: glamSmiling, alt: "Natural glam bridal makeup, smiling portrait", cat: "Bridal" },
-  { image: stillVase, alt: "Still life floral styling detail", cat: "Creative" },
-  { image: bridalGolden, alt: "Golden hour bridal makeup portrait by Elisha McCoy", cat: "Bridal" },
+  { image: bridalPhoto3, alt: "Elegant bold-lip makeup and updo styling by Elisha McCoy", cat: "Prom" },
+  { image: bridalPhoto4, alt: "Bridal makeup close-up with veil by Elisha McCoy, Oxfordshire", cat: "Bridal" },
+  { image: bridalBouquet, alt: "Bridal bouquet styling detail by Elisha McCoy", cat: "Creative" },
+  { image: elishaPortfolio3, alt: "Close-up bronze eye makeup detail by Elisha McCoy", cat: "Occasion" },
+  { image: bridalPhoto5, alt: "Bridal party laughing together, golden hour glam makeup by Elisha McCoy", cat: "Occasion" },
+  { image: elishaPortfolio4, alt: "Natural soft glam makeup portrait in a garden setting by Elisha McCoy", cat: "Prom" },
+  { image: editorialProfile, alt: "Editorial side-profile makeup portrait by Elisha McCoy", cat: "Bridal" },
   { image: glamSultry, alt: "Full glam evening makeup by Elisha McCoy", cat: "Occasion" },
-  { image: bridalGloves, alt: "Bridal gloves and lavender styling detail", cat: "Bridal" },
-  { image: editorialProfile, alt: "Editorial side-profile makeup portrait by Elisha McCoy", cat: "Editorial" },
-  { image: glamSmoky, alt: "Smoky eye glam makeup close-up by Elisha McCoy", cat: "Occasion" },
-  { image: bridalHair, alt: "Bridal hair accessories detail, pearl and gold", cat: "Bridal" },
-  { image: glamNatural, alt: "Natural glam makeup portrait by Elisha McCoy", cat: "Prom" },
-  { image: stillPerfume, alt: "Beauty styling still life detail", cat: "Creative" },
-  { image: appDetail, alt: "Makeup application in progress by Elisha McCoy", cat: "Occasion" },
-  { image: bridalBouquet, alt: "Bridal bouquet detail from a wedding by Elisha McCoy", cat: "Bridal" },
+  { image: creativePhoto, alt: "Graphic eyeliner editorial makeup with pearl detailing by Elisha McCoy", cat: "Creative" },
+  { image: editorialPhoto1, alt: "Dramatic smoky eye and deep lip makeup by Elisha McCoy", cat: "Creative" },
 ];
 ---
 
@@ -45,16 +39,14 @@ const gallery = [
   <section class="px-6 pt-16 sm:px-10 lg:px-16 lg:pt-24">
     <p class="text-xs uppercase tracking-[0.14em] text-subtle">Portfolio</p>
     <h1 class="mt-3">
-      <span class="block text-base font-ui font-normal normal-case tracking-normal text-subtle sm:text-lg">
-        Bridal &amp; Editorial Makeup Portfolio
-      </span>
+     
       <span class="mt-2 block font-header text-3xl text-ink sm:text-4xl">Makeup Artist Portfolio</span>
     </h1>
-    <p class="mt-6 max-w-2xl text-body">
+    <p class="mt-6 max-w-2xl font-header text-body">
       A selection of recent work across bridal, occasion, editorial, prom and creative makeup in Oxfordshire and beyond.
     </p>
 
-    <div role="tablist" aria-label="Filter portfolio by category" class="mt-10 flex flex-wrap gap-8 border-b border-line pb-2">
+    <div role="tablist" aria-label="Filter portfolio by category" class="mt-10 flex flex-wrap gap-8 border-t border-b border-line py-4">
       {filters.map((f, i) => (
         <button
           type="button"
@@ -62,7 +54,7 @@ const gallery = [
           aria-selected={i === 0 ? "true" : "false"}
           data-filter={f}
           class:list={[
-            "filter-tab min-h-11 border-b-2 px-1 text-xs uppercase tracking-[0.14em]",
+            "filter-tab min-h-6 border-b-2 px-1 text-xs uppercase tracking-[0.14em]",
             i === 0 ? "border-ink text-ink" : "border-transparent text-subtle hover:text-ink",
           ]}
         >

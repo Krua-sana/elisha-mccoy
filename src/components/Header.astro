@@ -1,6 +1,6 @@
 ---
 import Tag from "./Tag.astro";
-import logo from "../assets/logo/logo.png";
+import logo from "../assets/logo/logo.svg";
 import { Image } from "astro:assets";
 
 const nav = [
@@ -17,7 +17,7 @@ const isActive = (href: string) =>
 ---
 
 <header class="relative bg-canvas">
-  <div class="mx-auto flex h-26 max-w-[1440px] items-center justify-between px-4 sm:px-8 lg:justify-center lg:px-16" style="height:6.5rem;">
+  <div class="flex h-26 max-w-[1440px] items-center justify-between px-4 sm:px-8 lg:px-16" style="height:6.5rem;">
     <a href="/" class="flex items-center" aria-label="Elisha McCoy — home">
       <Image src={logo} alt="Elisha McCoy" width={106} height={44} />
     </a>

@@ -4,10 +4,10 @@ import Button from "../components/Button.astro";
 import { Image } from "astro:assets";
 
 import headerImg from "../assets/photos/makeup-application-detail.png";
-import catBridal from "../assets/photos/bridal-veil-portrait.jpeg";
+import catBridal from "../assets/photos/bridal_photo_4.png";
 import catGlam from "../assets/photos/glam-sultry-portrait.png";
-import catEditorial from "../assets/photos/editorial-dark-profile-portrait.png";
-import catSpecialist from "../assets/photos/natural-glam-portrait.jpeg";
+import catEditorial from "../assets/photos/editorial_photo_1.png";
+import catSpecialist from "../assets/photos/behind_scene_1.png";
 
 const categories = [
   {
@@ -16,7 +16,7 @@ const categories = [
     intro: "Calm, lasting makeup for the whole wedding party — from first look to last dance.",
     enquire: "Enquire about bridal makeup",
     image: catBridal,
-    alt: "Bridal makeup by Elisha McCoy, Oxfordshire",
+    alt: "Bridal makeup close-up with veil by Elisha McCoy, Oxfordshire",
     items: [
       ["Bridal Makeup", "Your full bridal look on the day, applied unhurried wherever you're getting ready."],
       ["Bridal Trial", "A pre-wedding session to test, tweak and agree every detail in advance."],
@@ -49,7 +49,7 @@ const categories = [
     intro: "Makeup built for the camera, the brief and the concept.",
     enquire: "Enquire about editorial work",
     image: catEditorial,
-    alt: "Editorial makeup portrait by Elisha McCoy, Oxfordshire",
+    alt: "Dramatic smoky eye and deep lip editorial makeup by Elisha McCoy, Oxfordshire",
     items: [
       ["Photoshoot Makeup", "Looks that hold up under both studio and natural light."],
       ["Editorial Makeup", "Concept-led makeup for magazines, lookbooks and campaigns."],
@@ -64,7 +64,7 @@ const categories = [
     intro: "Focused sessions and add-ons, plus one-to-one teaching.",
     enquire: "Enquire about a consultation",
     image: catSpecialist,
-    alt: "Natural makeup portrait by Elisha McCoy, Oxfordshire",
+    alt: "Makeup application in progress by Elisha McCoy, Oxfordshire",
     items: [
       ["Mature Skin Makeup", "Techniques and formulas chosen for texture, dryness and fine lines."],
       ["False Lash Application", "Strip or cluster lashes applied on their own or with any look."],
@@ -87,17 +87,13 @@ const categories = [
     <div class="flex flex-col justify-center px-6 py-16 sm:px-10 lg:px-16 lg:py-24">
       <p class="text-xs uppercase tracking-[0.14em] text-subtle">Services</p>
       <h1 class="mt-3">
-        <span class="block text-base font-ui font-normal normal-case tracking-normal text-subtle sm:text-lg">
-          Bridal, Editorial &amp; Occasion Makeup
-        </span>
+        
         <span class="mt-2 block font-header text-3xl text-ink sm:text-4xl">Makeup Services in Oxfordshire</span>
       </h1>
-      <p class="mt-6 max-w-lg text-body">
+      <p class="mt-6 max-w-lg font-header text-body">
         Explore makeup services across Oxfordshire, from luxury bridal and wedding makeup to occasion, prom, editorial, photoshoot and personal branding looks.
       </p>
-      <p class="mt-4 text-xs text-subtle">
-        All services are enquiry-led — no public price list, just a bespoke quote for you.
-      </p>
+      
     </div>
     <div class="aspect-[4/3] lg:aspect-auto">
       <Image src={headerImg} alt="Makeup application in progress by Elisha McCoy" class="h-full w-full object-cover" widths={[600, 1200]} sizes="(min-width: 1024px) 50vw, 100vw" priority />
@@ -112,7 +108,7 @@ const categories = [
           <h2 class="font-header text-3xl text-ink sm:text-4xl">{cat.label}</h2>
           <Button href="/contact/" variant="text">{cat.enquire} →</Button>
         </div>
-        <p class="mt-4 max-w-2xl text-body">{cat.intro}</p>
+        <p class="mt-4 max-w-2xl font-header text-body">{cat.intro}</p>
 
         <div class="mt-10 grid grid-cols-1 gap-10 lg:grid-cols-[360px_1fr]">
           <div class="aspect-[6/5] overflow-hidden">
@@ -122,7 +118,7 @@ const categories = [
             {cat.items.map(([name, desc], idx) => (
               <div class:list={["py-5", idx !== 0 && "border-t border-line"]}>
                 <h3 class="font-header text-lg text-ink">{name}</h3>
-                <p class="mt-1 text-sm text-body">{desc}</p>
+                <p class="mt-1 font-header text-sm text-body">{desc}</p>
               </div>
             ))}
           </div>
