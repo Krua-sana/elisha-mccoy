@@ -11,20 +11,27 @@ const nav = [
   { href: "/contact/", label: "Contact" },
 ];
 
+const base = import.meta.env.BASE_URL;
+
+const getHref = (href: string) =>
+  href === "/" ? base : `${base}${href.replace(/^\/+/, "")}`;
+
 const path = Astro.url.pathname;
 const isActive = (href: string) =>
-  href === "/" ? path === "/" : path.startsWith(href);
+  href === "/"
+    ? path === base || path === `${base}index.html`
+    : path.startsWith(getHref(href));
 ---
 
 <header class="relative bg-canvas">
   <div class="flex h-26 max-w-[1440px] items-center justify-between px-4 sm:px-8 lg:px-16" style="height:6.5rem;">
-    <a href="/" class="flex items-center" aria-label="Elisha McCoy — home">
+    <a href={base} class="flex items-center" aria-label="Elisha McCoy — home">
       <Image src={logo} alt="Elisha McCoy" width={106} height={44} />
     </a>
 
     <nav aria-label="Primary" class="hidden lg:flex lg:absolute lg:right-16 lg:top-1/2 lg:-translate-y-1/2 lg:gap-10">
       {nav.map((item) => (
-        <Tag href={item.href} active={isActive(item.href)}>{item.label}</Tag>
+        <Tag href={getHref(item.href)} active={isActive(item.href)}>{item.label}</Tag>
       ))}
     </nav>
 
@@ -53,7 +60,7 @@ const isActive = (href: string) =>
       {nav.map((item) => (
         <li>
           <a
-            href={item.href}
+            href={getHref(item.href)}
             aria-current={isActive(item.href) ? "page" : undefined}
             class:list={[
               "flex min-h-11 items-center uppercase text-sm tracking-[0.14em]",

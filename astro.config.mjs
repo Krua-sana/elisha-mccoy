@@ -7,6 +7,7 @@ import tailwindcss from '@tailwindcss/vite';
 export default defineConfig({
   // site: 'https://www.elishamccoy.com',
   site: 'https://krua-sana.github.io',
+  //base: import.meta.env.PROD ? '/elisha-mccoy/' : '/',
   base: '/elisha-mccoy/',
   devToolbar: {
     enabled: false

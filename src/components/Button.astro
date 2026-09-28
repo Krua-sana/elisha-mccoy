@@ -8,6 +8,7 @@ interface Props {
 
 const { href, variant = "primary", class: className = "", type, ...rest } = Astro.props;
 const Tag = href ? "a" : "button";
+const resolvedHref = href ? `${import.meta.env.BASE_URL}${href.replace(/^\/+/, "")}` : undefined;
 
 const base =
   "inline-flex items-center gap-2 rounded-none uppercase text-[11px] font-medium transition-colors";
@@ -23,7 +24,7 @@ const variants: Record<string, string> = {
 ---
 
 <Tag
-  href={href}
+  href={resolvedHref}
   type={!href ? (type ?? "button") : undefined}
   class={`${base} ${tracking} ${variants[variant]} ${className}`}
   {...rest}
