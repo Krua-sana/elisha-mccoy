@@ -63,7 +63,7 @@ const eventTypes = [
 
       <Input id="location" label="Location or venue" />
       <div>
-        <Input id="people" label="Number of people" type="number" helper="Include yourself. An estimate is fine." />
+        <Input id="people" label="Number of people" type="number" min="1" max="50" step="1" helper="Include yourself. An estimate is fine." />
       </div>
 
       <Textarea id="message" label="The look you have in mind" helper="Any inspiration, colours or references are welcome." />
@@ -126,6 +126,14 @@ const eventTypes = [
   const form = document.getElementById("enquiry-form") as HTMLFormElement | null;
   const status = document.getElementById("form-status");
 
+  // Don't allow event dates in the past
+  const dateInput = document.getElementById("event-date") as HTMLInputElement | null;
+  if (dateInput) {
+    const now = new Date();
+    const pad = (n: number) => String(n).padStart(2, "0");
+    dateInput.min = `${now.getFullYear()}-${pad(now.getMonth() + 1)}-${pad(now.getDate())}`;
+  }
+
   const setStatus = (msg: string) => {
     if (!status) return;
     status.textContent = msg;
@@ -156,10 +164,18 @@ const eventTypes = [
         body: data,
       });
       const json = await res.json().catch(() => ({}));
-      if (!res.ok || json.success === false || json.success === "false") throw new Error(json.message);
+      const message = String(json.message ?? "");
+      if (/activat/i.test(message)) {
+        // First-ever submission: FormSubmit emails an activation link to the inbox instead of the enquiry.
+        console.warn("FormSubmit:", message);
+        setStatus("Form setup: an activation email has been sent to elishamaccoy@gmail.com. Once it's confirmed, enquiries will be delivered.");
+        return;
+      }
+      if (!res.ok || json.success === false || json.success === "false") throw new Error(message);
       setStatus("Thank you — your enquiry has been sent. I'll be in touch soon with availability.");
       form.reset();
-    } catch {
+    } catch (err) {
+      console.error("Enquiry form error:", err);
       setStatus("Sorry, something went wrong sending your enquiry. Please email elishamaccoy@gmail.com directly.");
     } finally {
       if (button) button.disabled = false;

@@ -8,9 +8,15 @@ interface Props {
   helper?: string;
   error?: string;
   placeholder?: string;
+  min?: string | number;
+  max?: string | number;
+  step?: string | number;
 }
 
 const {
+  min,
+  max,
+  step,
   id,
   name = id,
   label,
@@ -45,6 +51,10 @@ const describedBy =
     type={type}
     required={required}
     placeholder={placeholder}
+    min={min}
+    max={max}
+    step={step}
+    inputmode={type === "number" ? "numeric" : undefined}
     aria-describedby={describedBy}
     aria-invalid={error ? "true" : undefined}
     class:list={[
