@@ -1,6 +1,7 @@
 ---
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
+import BackToTop from "../components/BackToTop.astro";
 import "../styles/global.css";
 
 interface Props {
@@ -43,12 +44,12 @@ const structuredData = {
     <meta property="og:url" content={canonicalURL} />
     <script type="application/ld+json" set:html={JSON.stringify(structuredData)} />
   </head>
-  <body>
-    <a href="#main" class="skip-link">Skip to content</a>
+  <body id="top">
     <Header />
     <main id="main">
       <slot />
     </main>
     <Footer />
+    <BackToTop />
   </body>
 </html>

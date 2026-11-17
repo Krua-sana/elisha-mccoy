@@ -33,7 +33,17 @@ const eventTypes = [
   </section>
 
   <section class="mx-auto grid max-w-[1440px] grid-cols-1 gap-16 px-6 py-16 sm:px-10 lg:grid-cols-[2fr_1fr] lg:px-16 lg:py-20">
-    <form id="enquiry-form" novalidate class="max-w-2xl space-y-8">
+    <form
+      id="enquiry-form"
+      action="https://formsubmit.co/elishamaccoy@gmail.com"
+      method="POST"
+      novalidate
+      class="max-w-2xl space-y-8"
+    >
+      <input type="hidden" name="_subject" value="New makeup enquiry from elishamccoy.com" />
+      <input type="hidden" name="_template" value="table" />
+      <input type="hidden" name="_captcha" value="false" />
+      <input type="text" name="_honey" tabindex="-1" autocomplete="off" aria-hidden="true" class="hidden" />
       <div>
         <h2 class="font-header text-2xl text-ink">Send an enquiry</h2>
         <p class="mt-2 text-sm text-subtle">Fields marked (required) must be completed.</p>
@@ -96,7 +106,7 @@ const eventTypes = [
       <div>
         <p class="text-xs uppercase tracking-[0.14em] text-subtle">Elsewhere</p>
         <ul class="mt-4 space-y-2">
-          <li><a class="text-ink underline" href="mailto:hello@elishamccoy.com">hello@elishamccoy.com</a></li>
+          <li><a class="text-ink underline" href="mailto:elishamaccoy@gmail.com">elishamaccoy@gmail.com</a></li>
           <li><a class="text-ink underline" href="https://instagram.com/elishaamccoy">Instagram — @elishaamccoy</a></li>
           <li><a class="text-ink underline" href="https://tiktok.com/@elishamacs">TikTok — @elishamacs</a></li>
         </ul>
@@ -116,15 +126,43 @@ const eventTypes = [
   const form = document.getElementById("enquiry-form") as HTMLFormElement | null;
   const status = document.getElementById("form-status");
 
-  form?.addEventListener("submit", (e) => {
+  const setStatus = (msg: string) => {
+    if (!status) return;
+    status.textContent = msg;
+    status.classList.remove("sr-only");
+    status.classList.add("text-sm", "text-body");
+  };
+
+  form?.addEventListener("submit", async (e) => {
     e.preventDefault();
-    const invalid = form.querySelector<HTMLElement>(":invalid, [aria-invalid='true']");
     if (!form.checkValidity()) {
-      invalid?.focus();
-      if (status) status.textContent = "Please check the highlighted fields and try again.";
+      form.querySelector<HTMLElement>(":invalid")?.focus();
+      setStatus("Please check the highlighted fields and try again.");
       return;
     }
-    if (status) status.textContent = "Thanks — your enquiry has been noted. This demo form does not send email yet.";
-    form.reset();
+
+    const button = form.querySelector<HTMLButtonElement>("button[type='submit']");
+    if (button) button.disabled = true;
+    setStatus("Sending your enquiry…");
+
+    const data = new FormData(form);
+    const email = data.get("email");
+    if (typeof email === "string") data.set("_replyto", email);
+
+    try {
+      const res = await fetch("https://formsubmit.co/ajax/elishamaccoy@gmail.com", {
+        method: "POST",
+        headers: { Accept: "application/json" },
+        body: data,
+      });
+      const json = await res.json().catch(() => ({}));
+      if (!res.ok || json.success === false || json.success === "false") throw new Error(json.message);
+      setStatus("Thank you — your enquiry has been sent. I'll be in touch soon with availability.");
+      form.reset();
+    } catch {
+      setStatus("Sorry, something went wrong sending your enquiry. Please email elishamaccoy@gmail.com directly.");
+    } finally {
+      if (button) button.disabled = false;
+    }
   });
 </script>
